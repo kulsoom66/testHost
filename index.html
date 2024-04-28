@@ -83,7 +83,7 @@
                     'Email': document.getElementById('email').value,
                     'Budget': document.getElementById('budget').value,
                     'Message': document.getElementById('message').value,
-                    'id': 0 
+             
                 }
             });
 
@@ -100,6 +100,8 @@
                 const sessionData = await response.json();
                 console.log('Session data:', sessionData); // Log session data for debugging
                 const sessionId = sessionData.session_id;
+                console.log('Session Id:', sessionId); // Log session data for debugging
+
                 const publishableKey = 'HGvTMLDssJghr9tlN9gr4DVYt0qyBy'; // Replace with your Thawani publishable key
                 window.location.href = `https://uat.checkout.thawani.om/pay/${sessionId}?key=${publishableKey}`;
             } else {
