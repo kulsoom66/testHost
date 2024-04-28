@@ -94,10 +94,10 @@
             success_url: 'https://kulsoom66.github.io/testHost/success.html',
             cancel_url: 'https://kulsoom66.github.io/testHost/failed.html',
             metadata: {
-                'Customer name': document.contactForm.name.value,
-                'Email': document.contactForm.email.value,
-                'Budget': document.contactForm.budget.value,
-                'Message': document.contactForm.message.value
+                  'Customer name': document.getElementById('name').value,
+            'Email': document.getElementById('email').value,
+            'Budget': document.getElementById('budget').value,
+            'Message': document.getElementById('message').value
             }
         });
 
