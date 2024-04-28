@@ -114,6 +114,9 @@ async function createPaymentSession() {
    if (response.ok) {
     const sessionData = await response.json();
     console.log('Session data:', sessionData); // Log session data for debugging
+    console.log('Session data:', sessionData.client_reference_id); // Log session data for debugging
+    console.log('Session data:', sessionData.id); // Log session data for debugging
+
     // Redirect user to Thawani payment hosted page
     if (sessionData.id) {
         const sessionId = sessionData.id;
