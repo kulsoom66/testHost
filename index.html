@@ -99,7 +99,7 @@
             if (response.ok) {
                 const sessionData = await response.json();
                 console.log('Session data:', sessionData); // Log session data for debugging
-                const sessionId = sessionData.session_id;
+                const sessionId = sessionData['session_id']; // Access session ID using bracket notation
                 console.log('Session Id:', sessionId); // Log session data for debugging
 
                 const publishableKey = 'HGvTMLDssJghr9tlN9gr4DVYt0qyBy'; // Replace with your Thawani publishable key
