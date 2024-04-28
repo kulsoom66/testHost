@@ -110,16 +110,23 @@ async function createPaymentSession() {
         body: data
     });
 
-    if (response.ok) {
-        const sessionData = await response.json();
-        // Redirect user to Thawani payment hosted page
+   if (response.ok) {
+    const sessionData = await response.json();
+    console.log('Session data:', sessionData); // Log session data for debugging
+    // Redirect user to Thawani payment hosted page
+    if (sessionData.id) {
         const sessionId = sessionData.id;
-        const publishableKey = 'HGvTMLDssJghr9tlN9gr4DVYt0qyBy'; // Replace with your Thawani publishable key
+        const publishableKey = 'YOUR_PUBLISHABLE_KEY'; // Replace with your Thawani publishable key
         window.location.href = `https://uat.checkout.thawani.om/pay/${sessionId}?key=${publishableKey}`;
     } else {
-        console.error('Failed to create payment session:', await response.text());
-        alert('Failed to create payment session. Please try again later.');
+        console.error('Session ID is undefined in the API response');
+        alert('Failed to redirect to payment page. Please try again later.');
     }
+} else {
+    console.error('Failed to create payment session:', await response.text());
+    alert('Failed to create payment session. Please try again later.');
+}
+
 }
 
     // Event listener for form submission
