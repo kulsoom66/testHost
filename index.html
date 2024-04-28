@@ -78,50 +78,48 @@
         "https://tjwvmzfvrlxdjxugkdjv.supabase.co",
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqd3ZtemZ2cmx4ZGp4dWdrZGp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQxMTg4MjEsImV4cCI6MjAyOTY5NDgyMX0.fYBgzCWpNwqGtz4LTSDGSkpATLjaxEt4JrCxgeo5vqg"
     );
-
-    // Function to create a payment session
-    async function createPaymentSession() {
-        const data = JSON.stringify({
-            client_reference_id: '123412',
-            mode: 'payment',
-            products: [
-                {
-                    name: 'Product 1',
-                    quantity: 1,
-                    unit_amount: 100 // Change this to the actual amount
-                }
-            ],
-            success_url: 'https://kulsoom66.github.io/testHost/index/success',
-            cancel_url: 'https://kulsoom66.github.io/testHost/index/failed',
-            metadata: {
-                  'Customer name': document.getElementById('name').value,
-            'Email': document.getElementById('email').value,
-            'Budget': document.getElementById('budget').value,
-            'Message': document.getElementById('message').value
+// Function to create a payment session
+async function createPaymentSession() {
+    const data = JSON.stringify({
+        client_reference_id: '123412',
+        mode: 'payment',
+        products: [
+            {
+                name: 'Product 1',
+                quantity: 1,
+                unit_amount: 100 // Change this to the actual amount
             }
-        });
-        console.log(data)
-        const response = await fetch('https://uatcheckout.thawani.om/api/v1/checkout/session', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'thawani-api-key': 'rRQ26GcsZzoEhbrP2HZvLYDbn9C9et' // Your Thawani Secret Key
-            },
-            body: data
-        });
-
-        if (response.ok) {
-            const sessionData = await response.json();
-            console.log(data);
-
-            // Redirect user to payment page
-            window.location.href = sessionData.redirect_url;
-        } else {
-            console.error('Failed to create payment session:', await response.text());
-            alert('Failed to create payment session. Please try again later.');
+        ],
+        success_url: 'https://kulsoom66.github.io/testHost/index/success',
+        cancel_url: 'https://kulsoom66.github.io/testHost/index/failed',
+        metadata: {
+              'Customer name': document.getElementById('name').value,
+        'Email': document.getElementById('email').value,
+        'Budget': document.getElementById('budget').value,
+        'Message': document.getElementById('message').value
         }
+    });
 
+    const response = await fetch('https://uatcheckout.thawani.om/api/v1/checkout/session', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'thawani-api-key': 'rRQ26GcsZzoEhbrP2HZvLYDbn9C9et' // Your Thawani Secret Key
+        },
+        body: data
+    });
+
+    if (response.ok) {
+        const sessionData = await response.json();
+        // Redirect user to Thawani payment hosted page
+        const sessionId = sessionData.id;
+        const publishableKey = 'HGvTMLDssJghr9tlN9gr4DVYt0qyBy'; // Replace with your Thawani publishable key
+        window.location.href = `https://uat.checkout.thawani.om/pay/${sessionId}?key=${publishableKey}`;
+    } else {
+        console.error('Failed to create payment session:', await response.text());
+        alert('Failed to create payment session. Please try again later.');
     }
+}
 
     // Event listener for form submission
     document.getElementById('contactForm').addEventListener('submit', async (event) => {
