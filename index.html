@@ -112,6 +112,8 @@
 
         if (response.ok) {
             const sessionData = await response.json();
+            console.log(data);
+
             // Redirect user to payment page
             window.location.href = sessionData.redirect_url;
         } else {
