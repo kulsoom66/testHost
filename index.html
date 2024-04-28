@@ -100,7 +100,7 @@
             'Message': document.getElementById('message').value
             }
         });
-
+        console.log(data)
         const response = await fetch('https://uatcheckout.thawani.om/api/v1/checkout/session', {
             method: 'POST',
             headers: {
