@@ -116,7 +116,7 @@ async function createPaymentSession() {
     // Redirect user to Thawani payment hosted page
     if (sessionData.id) {
         const sessionId = sessionData.id;
-        const publishableKey = 'YOUR_PUBLISHABLE_KEY'; // Replace with your Thawani publishable key
+        const publishableKey = 'HGvTMLDssJghr9tlN9gr4DVYt0qyBy'; // Replace with your Thawani publishable key
         window.location.href = `https://uat.checkout.thawani.om/pay/${sessionId}?key=${publishableKey}`;
     } else {
         console.error('Session ID is undefined in the API response');
